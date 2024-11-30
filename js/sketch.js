@@ -10,7 +10,7 @@ const settings = {
 
 const sketch = () => {
   const margin = 120;
-  const cols = 12;
+  const cols = 16;
   const rows = cols;
 
   return ({ context, width, height, playhead }) => {
@@ -20,7 +20,7 @@ const sketch = () => {
     const tileWidth = (width - 2 * margin) / cols;
     const tileHeight = (height - 2 * margin) / rows;
 
-    const animationSpeed = 4;
+    const animationSpeed = 3;
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -32,18 +32,19 @@ const sketch = () => {
 
         context.save();
         context.strokeStyle = 'hsl(0, 0%, 9%)';
-        context.lineWidth = 12;
+        context.lineWidth = 8;
 
         context.translate(tilePosX + tileWidth / 2, tilePosY + tileHeight / 2);
         context.rotate(Math.sin(playhead * Math.PI * 2 * animationSpeed + i * 0.2 - j * 0.2) * Math.PI / 2);
 
         context.beginPath();
         context.moveTo(0, 0);
-        context.lineTo(-tileWidth / 2, -tileWidth / 2);
+        context.lineTo(-tileWidth / 2, tileWidth / 2);
+        // context.arc(0, 0, tileWidth / 3, 0, Math.PI * 2);
+
         context.stroke();
 
         context.restore();
-
       }
     }
   };
